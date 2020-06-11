@@ -1,5 +1,6 @@
-## to run terrform infrastructure build
+## To run terrform infrastructure build
 
 - terraform plan -out config.tfplan
 - terraform apply
 - terraform show (docker ps in this case also)
+- nginx demo build
