@@ -14,7 +14,7 @@ resource "docker_container" "nginx-server" {
   }
   volumes {
     container_path  = "/usr/share/nginx/tmp"
-    host_path = "/home/stationedabroad/Documents/terraform/nginx/server-1"
+    host_path = "/home/stationedabroad/Documents/terraform/nginx/server-2"
     read_only = true
   }
 }
