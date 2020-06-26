@@ -28,7 +28,7 @@ resource "aws_instance" "ec2-ubuntu-t2micro" {
 	key_name = "my-terraform"
 
 	user_data = <<-EOF
-			!#/bin/bash
+			#!/bin/bash
 			echo "Server, connected status ..." > index.html
 			nohup busybox httpd -f -p 8080 &
 			EOF
