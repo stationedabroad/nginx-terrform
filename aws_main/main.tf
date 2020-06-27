@@ -1,6 +1,7 @@
 variable "PORT" {
 	description = "web server port used across configuration"
 	type = number
+	default = 8080
 }
 
 variable "SSH_PORT" {
