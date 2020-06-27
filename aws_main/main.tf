@@ -15,6 +15,10 @@ output "ec2_public_ip" {
 	description = "public IP address of instantiated EC2 instance"
 }
 
+output "default_ports" {
+	value = [var.PORT, var.SSH_PORT]
+}
+
 provider "aws" {
 	region = "eu-west-2"
 }
