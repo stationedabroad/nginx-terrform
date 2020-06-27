@@ -1,3 +1,8 @@
+variable "PORT" {
+	description = "web server port used across configuration"
+	type = number
+}
+
 provider "aws" {
 	region = "eu-west-2"
 }
