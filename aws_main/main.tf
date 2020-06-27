@@ -10,6 +10,11 @@ variable "SSH_PORT" {
 	default = 22
 }
 
+output "ec2_public_ip" {
+	value = aws_instance.ec2-ubuntu-t2micro.public_ip
+	description = "public IP address of instantiated EC2 instance"
+}
+
 provider "aws" {
 	region = "eu-west-2"
 }
