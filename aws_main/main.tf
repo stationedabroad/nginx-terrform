@@ -17,6 +17,7 @@ output "ec2_public_ip" {
 
 output "default_ports" {
 	value = [var.PORT, var.SSH_PORT]
+	description = "default ports exposed"
 }
 
 provider "aws" {
