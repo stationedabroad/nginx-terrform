@@ -3,6 +3,12 @@ variable "PORT" {
 	type = number
 }
 
+variable "SSH_PORT" {
+	description = "ssh port entry for ec2 instance"
+	type = number
+	default = 22
+}
+
 provider "aws" {
 	region = "eu-west-2"
 }
@@ -19,8 +25,8 @@ resource "aws_security_group" "instance" {
 	}
 
 	ingress {
-		from_port = 22
-		to_port = 22
+		from_port = var.SSH_PORT
+		to_port = var.SSH_PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
