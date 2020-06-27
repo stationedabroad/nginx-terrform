@@ -12,8 +12,8 @@ resource "aws_security_group" "instance" {
 	name = "terraform-base-ami-instance"
 
 	ingress {
-		from_port = 8080
-		to_port = 8080
+		from_port = var.PORT
+		to_port = var.PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
@@ -35,7 +35,7 @@ resource "aws_instance" "ec2-ubuntu-t2micro" {
 	user_data = <<-EOF
 			#!/bin/bash
 			echo "Server, connected status ..." > index.html
-			nohup busybox httpd -f -p 8080 &
+			nohup busybox httpd -f -p ${var.PORT} &
 			EOF
 
 	tags = {
