@@ -81,3 +81,9 @@ resource "aws_autoscaling_group" "ec2-asg" {
 		propagate_at_launch = true
 	}
 }
+
+resource "aws_lb" "ec2-alb" {
+	name = "terraform-ec2-alb"
+	load_balancer_type = "application"
+	subnets = data.aws_subnet_ids.default_subnets.ids
+}
