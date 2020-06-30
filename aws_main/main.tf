@@ -87,3 +87,9 @@ resource "aws_lb" "ec2-alb" {
 	load_balancer_type = "application"
 	subnets = data.aws_subnet_ids.default_subnets.ids
 }
+
+resource "aws_lb_listener" "http" {
+	load_balancer_arn = aws_lb.ec2-alb.arn
+	port = 80
+	protocol = "HTTP"
+}
