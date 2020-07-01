@@ -51,6 +51,26 @@ resource "aws_security_group" "instance" {
 	}
 }
 
+resource "aws_security_group" "alb" {
+	name = "terraform-base-alb"
+
+	# Allow inbound http req
+	ingress {
+		from_port = 80
+		to_port = 80
+		protocol = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	# Allow all outbound req
+	egress {
+		from_port = 0
+		to_port = 0
+		protocol = "-1"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+}
+
 resource "aws_launch_configuration" "ec2-asg-ubuntu-t2micro" {
 	image_id = "ami-00f6a0c18edb19300"
 	instance_type = "t2.micro"
@@ -86,6 +106,7 @@ resource "aws_lb" "ec2-alb" {
 	name = "terraform-ec2-alb"
 	load_balancer_type = "application"
 	subnets = data.aws_subnet_ids.default_subnets.ids
+	security_groups = [aws_security_group.alb.id]
 }
 
 resource "aws_lb_listener" "http" {
