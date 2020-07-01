@@ -92,6 +92,9 @@ resource "aws_autoscaling_group" "ec2-asg" {
 	launch_configuration = aws_launch_configuration.ec2-asg-ubuntu-t2micro.name
 	vpc_zone_identifier = data.aws_subnet_ids.default_subnets.ids
 
+	target_group_arns = [aws_alb_target_group.asg-target.arn]
+	health_check_type = "ELB"
+
 	min_size = 2
 	max_size = 10
 
