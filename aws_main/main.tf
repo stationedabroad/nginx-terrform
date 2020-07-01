@@ -124,3 +124,10 @@ resource "aws_lb_listener" "http" {
 		}
 	}
 }
+
+resource "aws_alb_target_group" "asg-target" {
+	name = "terraform-base-asg"
+	port = var.PORT
+	protocol = "HTTP"
+	vpc_id = data.aws_vpc.default_vpc.id
+}
