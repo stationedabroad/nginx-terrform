@@ -130,4 +130,14 @@ resource "aws_alb_target_group" "asg-target" {
 	port = var.PORT
 	protocol = "HTTP"
 	vpc_id = data.aws_vpc.default_vpc.id
+
+	health_check {
+		path = "/"
+		protocol = "HTTP"
+		matcher = "200"
+		interval = 15
+		timeout = 3
+		healthy_threshold = 2
+		unhealthy_threshold = 2
+	}	
 }
