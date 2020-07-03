@@ -1,10 +1,10 @@
-variable "PORT" {
+variable "DEFAULT_PORT" {
 	description = "web server port used across configuration"
 	type = number
 	default = 8080
 }
 
-variable "SSH_PORT" {
+variable "DEFAULT_SSH_PORT" {
 	description = "ssh port entry for ec2 instance"
 	type = number
 	default = 22
@@ -16,7 +16,7 @@ output "ec2_public_ip" {
 }
 
 output "default_ports" {
-	value = [var.PORT, var.SSH_PORT]
+	value = [var.DEFAULT_PORT, var.DEFAULT_SSH_PORT]
 	description = "default ports exposed"
 }
 
@@ -37,15 +37,15 @@ resource "aws_security_group" "instance" {
 	name = "terraform-base-ami-instance"
 
 	ingress {
-		from_port = var.PORT
-		to_port = var.PORT
+		from_port = var.DEFAULT_PORT
+		to_port = var.DEFAULT_PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
 
 	ingress {
-		from_port = var.SSH_PORT
-		to_port = var.SSH_PORT
+		from_port = var.DEFAULT_SSH_PORT
+		to_port = var.DEFAULT_SSH_PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
@@ -80,7 +80,7 @@ resource "aws_launch_configuration" "ec2-asg-ubuntu-t2micro" {
 	user_data = <<-EOF
 			#!/bin/bash
 			echo "Server, connected status ..." > index.html
-			nohup busybox httpd -f -p ${var.PORT} &
+			nohup busybox httpd -f -p ${var.DEFAULT_PORT} &
 			EOF
 
 	lifecycle {
@@ -130,7 +130,7 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_alb_target_group" "asg-target" {
 	name = "terraform-base-asg"
-	port = var.PORT
+	port = var.DEFAULT_PORT
 	protocol = "HTTP"
 	vpc_id = data.aws_vpc.default_vpc.id
 
