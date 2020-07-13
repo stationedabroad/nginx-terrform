@@ -138,7 +138,7 @@ resource "aws_alb_target_group" "asg-target" {
 		path = "/"
 		protocol = "HTTP"
 		matcher = "200"
-		interval = 15
+		interval = 10
 		timeout = 3
 		healthy_threshold = 2
 		unhealthy_threshold = 2
