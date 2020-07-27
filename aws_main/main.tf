@@ -12,7 +12,7 @@ variable "DEFAULT_SSH_PORT" {
 
 output "ec2_public_ip" {
 	value = "tbc"
-	description = "public IP address of instantiated EC2 instance"
+	description = "public IP address of EC2 instance"
 }
 
 output "default_ports" {
