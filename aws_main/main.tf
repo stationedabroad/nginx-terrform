@@ -79,7 +79,7 @@ resource "aws_launch_configuration" "ec2-asg-ubuntu-t2micro" {
 
 	user_data = <<-EOF
 			#!/bin/bash
-			echo "Server, connected status ..." > index.html
+			echo "Server(1), connected status ..." > index.html
 			nohup busybox httpd -f -p ${var.DEFAULT_PORT} &
 			EOF
 
