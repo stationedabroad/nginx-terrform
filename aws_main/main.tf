@@ -16,7 +16,7 @@ output "ec2_public_ip" {
 }
 
 output "default_ports" {
-	value = [var.DEFAULT_PORT, var.DEFAULT_SSH_PORT]
+	value = [var.DEFAULT_ACCESS_PORT, var.DEFAULT_SSH_ACCESS_PORT]
 	description = "default ports exposed"
 }
 
