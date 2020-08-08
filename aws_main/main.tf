@@ -4,7 +4,7 @@ variable "DEFAULT_ACCESS_PORT" {
 	default = 8080
 }
 
-variable "DEFAULT_SSH_PORT" {
+variable "DEFAULT_SSH_ACCESS_PORT" {
 	description = "ssh port entry for ec2 instance"
 	type = number
 	default = 22
