@@ -1,4 +1,4 @@
-variable "DEFAULT_PORT" {
+variable "DEFAULT_ACCESS_PORT" {
 	description = "web server port used across configuration"
 	type = number
 	default = 8080
