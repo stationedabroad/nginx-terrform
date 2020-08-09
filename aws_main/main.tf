@@ -37,15 +37,15 @@ resource "aws_security_group" "instance" {
 	name = "terraform-base-ami-instance"
 
 	ingress {
-		from_port = var.DEFAULT_PORT
-		to_port = var.DEFAULT_PORT
+		from_port = var.DEFAULT_ACCESS_PORT
+		to_port = var.DEFAULT_ACCESS_PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
 
 	ingress {
-		from_port = var.DEFAULT_SSH_PORT
-		to_port = var.DEFAULT_SSH_PORT
+		from_port = var.DEFAULT_SSH_ACCESS_PORT
+		to_port = var.DEFAULT_SSH_ACCESS_PORT
 		protocol = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
@@ -80,7 +80,7 @@ resource "aws_launch_configuration" "ec2-asg-ubuntu-t2micro" {
 	user_data = <<-EOF
 			#!/bin/bash
 			echo "Server Started (1), connected status 1 ..." > index.html
-			nohup busybox httpd -f -p ${var.DEFAULT_PORT} &
+			nohup busybox httpd -f -p ${var.DEFAULT_ACCESS_PORT} &
 			EOF
 
 	lifecycle {
